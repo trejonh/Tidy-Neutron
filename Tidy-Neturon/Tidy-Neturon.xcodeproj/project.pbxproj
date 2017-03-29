@@ -15,6 +15,7 @@
 		A8491A4C1E88803F00DCB291 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8491A4A1E88803F00DCB291 /* LaunchScreen.storyboard */; };
 		A8491A571E88803F00DCB291 /* Tidy_NeturonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8491A561E88803F00DCB291 /* Tidy_NeturonTests.swift */; };
 		A8491A621E88803F00DCB291 /* Tidy_NeturonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8491A611E88803F00DCB291 /* Tidy_NeturonUITests.swift */; };
+		A8615A8F1E8C43820031753D /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8615A8E1E8C43820031753D /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		A8491A5D1E88803F00DCB291 /* Tidy-NeturonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tidy-NeturonUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8491A611E88803F00DCB291 /* Tidy_NeturonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tidy_NeturonUITests.swift; sourceTree = "<group>"; };
 		A8491A631E88803F00DCB291 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A8615A8E1E8C43820031753D /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8615A8F1E8C43820031753D /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +82,7 @@
 		A8491A321E88803F00DCB291 = {
 			isa = PBXGroup;
 			children = (
+				A8615A8E1E8C43820031753D /* CoreBluetooth.framework */,
 				A8491A3D1E88803F00DCB291 /* Tidy-Neturon */,
 				A8491A551E88803F00DCB291 /* Tidy-NeturonTests */,
 				A8491A601E88803F00DCB291 /* Tidy-NeturonUITests */,
@@ -495,6 +499,7 @@
 				A8491A681E88803F00DCB291 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A8491A691E88803F00DCB291 /* Build configuration list for PBXNativeTarget "Tidy-NeturonTests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +508,7 @@
 				A8491A6B1E88803F00DCB291 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A8491A6C1E88803F00DCB291 /* Build configuration list for PBXNativeTarget "Tidy-NeturonUITests" */ = {
 			isa = XCConfigurationList;
@@ -511,6 +517,7 @@
 				A8491A6E1E88803F00DCB291 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreBluetooth
 class ViewController: UIViewController {
     
     //MARK: Properties
