@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A817ECE61E92DAD400F26173 /* ConnectToWifiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A817ECE51E92DAD400F26173 /* ConnectToWifiViewController.swift */; };
+		A81B91771E92D41200C273DB /* BluetoothViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A81B91761E92D41200C273DB /* BluetoothViewController.swift */; };
 		A8491A3F1E88803F00DCB291 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8491A3E1E88803F00DCB291 /* AppDelegate.swift */; };
 		A8491A411E88803F00DCB291 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8491A401E88803F00DCB291 /* ViewController.swift */; };
 		A8491A441E88803F00DCB291 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8491A421E88803F00DCB291 /* Main.storyboard */; };
@@ -14,7 +16,6 @@
 		A8491A491E88803F00DCB291 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8491A481E88803F00DCB291 /* Assets.xcassets */; };
 		A8491A4C1E88803F00DCB291 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8491A4A1E88803F00DCB291 /* LaunchScreen.storyboard */; };
 		A8491A571E88803F00DCB291 /* Tidy_NeturonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8491A561E88803F00DCB291 /* Tidy_NeturonTests.swift */; };
-		A8491A621E88803F00DCB291 /* Tidy_NeturonUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8491A611E88803F00DCB291 /* Tidy_NeturonUITests.swift */; };
 		A8615A8F1E8C43820031753D /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8615A8E1E8C43820031753D /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A817ECE51E92DAD400F26173 /* ConnectToWifiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectToWifiViewController.swift; sourceTree = "<group>"; };
+		A81B91761E92D41200C273DB /* BluetoothViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothViewController.swift; sourceTree = "<group>"; };
 		A8491A3B1E88803F00DCB291 /* Tidy-Neturon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tidy-Neturon.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8491A3E1E88803F00DCB291 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A8491A401E88803F00DCB291 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -48,8 +51,6 @@
 		A8491A561E88803F00DCB291 /* Tidy_NeturonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tidy_NeturonTests.swift; sourceTree = "<group>"; };
 		A8491A581E88803F00DCB291 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8491A5D1E88803F00DCB291 /* Tidy-NeturonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tidy-NeturonUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A8491A611E88803F00DCB291 /* Tidy_NeturonUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tidy_NeturonUITests.swift; sourceTree = "<group>"; };
-		A8491A631E88803F00DCB291 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8615A8E1E8C43820031753D /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		A86E62D41E8C59850088593F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -87,7 +88,6 @@
 				A8615A8E1E8C43820031753D /* CoreBluetooth.framework */,
 				A8491A3D1E88803F00DCB291 /* Tidy-Neturon */,
 				A8491A551E88803F00DCB291 /* Tidy-NeturonTests */,
-				A8491A601E88803F00DCB291 /* Tidy-NeturonUITests */,
 				A8491A3C1E88803F00DCB291 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,6 +112,8 @@
 				A8491A4A1E88803F00DCB291 /* LaunchScreen.storyboard */,
 				A8491A4D1E88803F00DCB291 /* Info.plist */,
 				A8491A451E88803F00DCB291 /* Tidy_Neturon.xcdatamodeld */,
+				A81B91761E92D41200C273DB /* BluetoothViewController.swift */,
+				A817ECE51E92DAD400F26173 /* ConnectToWifiViewController.swift */,
 			);
 			path = "Tidy-Neturon";
 			sourceTree = "<group>";
@@ -123,15 +125,6 @@
 				A8491A581E88803F00DCB291 /* Info.plist */,
 			);
 			path = "Tidy-NeturonTests";
-			sourceTree = "<group>";
-		};
-		A8491A601E88803F00DCB291 /* Tidy-NeturonUITests */ = {
-			isa = PBXGroup;
-			children = (
-				A8491A611E88803F00DCB291 /* Tidy_NeturonUITests.swift */,
-				A8491A631E88803F00DCB291 /* Info.plist */,
-			);
-			path = "Tidy-NeturonUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +260,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8491A411E88803F00DCB291 /* ViewController.swift in Sources */,
+				A817ECE61E92DAD400F26173 /* ConnectToWifiViewController.swift in Sources */,
+				A81B91771E92D41200C273DB /* BluetoothViewController.swift in Sources */,
 				A8491A471E88803F00DCB291 /* Tidy_Neturon.xcdatamodeld in Sources */,
 				A8491A3F1E88803F00DCB291 /* AppDelegate.swift in Sources */,
 			);
@@ -284,7 +279,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8491A621E88803F00DCB291 /* Tidy_NeturonUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

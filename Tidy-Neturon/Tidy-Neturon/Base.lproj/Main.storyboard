@@ -80,12 +80,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1339.5" y="164.25"/>
+            <point key="canvasLocation" x="1339.5" y="156.75"/>
         </scene>
         <!--Bluetooth Devices-->
         <scene sceneID="0yi-NP-t4I">
             <objects>
-                <viewController title="Bluetooth Devices" id="Skn-f7-I1L" customClass="ViewController" customModule="Tidy_Neturon" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Bluetooth Devices" id="Skn-f7-I1L" customClass="BluetoothViewController" customModule="Tidy_Neturon" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ffj-2T-VW6"/>
                         <viewControllerLayoutGuide type="bottom" id="cGN-eT-kyl"/>
@@ -108,6 +108,9 @@
                                         <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" button="YES"/>
                                         </accessibility>
+                                        <connections>
+                                            <segue destination="J28-Yc-LIL" kind="presentation" id="Pu5-Lg-NVo"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
@@ -134,6 +137,71 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CWf-P0-pEc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2121" y="156.75"/>
+        </scene>
+        <!--ConnectToWifi-->
+        <scene sceneID="X18-m8-TDk">
+            <objects>
+                <viewController title="ConnectToWifi" id="J28-Yc-LIL" customClass="ConnectToWifiViewController" customModule="Tidy_Neturon" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dCh-z1-s7D"/>
+                        <viewControllerLayoutGuide type="bottom" id="eez-oz-Ktw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iAa-IK-8z4">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect to local Wi-Fi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gUM-r6-bNl">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="102" y="87" width="197" height="35"/>
+                                </variation>
+                            </label>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TP3-3g-gui">
+                                <rect key="frame" x="0.0" y="-216" width="320" height="216"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="185" width="400" height="216"/>
+                                </variation>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gDd-P1-qK0">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="CONNECT"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="102" y="563" width="197" height="30"/>
+                                </variation>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fJo-fG-3E1">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="19" y="429" width="257" height="30"/>
+                                </variation>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="gUM-r6-bNl"/>
+                                <exclude reference="TP3-3g-gui"/>
+                                <exclude reference="gDd-P1-qK0"/>
+                                <exclude reference="fJo-fG-3E1"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="gUM-r6-bNl"/>
+                                <include reference="TP3-3g-gui"/>
+                                <include reference="gDd-P1-qK0"/>
+                                <include reference="fJo-fG-3E1"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nkd-h9-OoO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2952" y="150.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="h7L-kv-IEl">
