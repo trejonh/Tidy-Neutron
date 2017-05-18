@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -16,8 +17,8 @@ import android.widget.Toast;
  */
 public class ControllerActivity extends AppCompatActivity {
     private final String SOCKET_ADDR = "192.168.0.18";
-    private final int SOCKET_PORT = 9000, SOCKET_VID_PORT = 8000;
-    private RaspBotConnector raspControllerSocket, raspVideoSocket;
+    private final int SOCKET_PORT = 9000, SOCKET_CONTROLLER_PORT = 8000;
+    private RaspBotConnector raspBotConnector;
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -98,15 +99,20 @@ public class ControllerActivity extends AppCompatActivity {
 
 
         // Set up the user interaction to manually show or hide the system UI.
-        mContentView.setOnClickListener(new View.OnClickListener() {
+       /* mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 toggle();
             }
         });
-        Toast.makeText(this,"Attempting to connect",Toast.LENGTH_LONG).show();
-       // raspControllerSocket = new RaspBotConnector(SOCKET_ADDR,SOCKET_PORT);
-        raspVideoSocket = new RaspBotConnector(SOCKET_ADDR,SOCKET_VID_PORT);
+        Toast.makeText(this,"Attempting to connect",Toast.LENGTH_LONG).show();*/
+        raspBotConnector = new RaspBotConnector(SOCKET_ADDR,SOCKET_PORT,SOCKET_CONTROLLER_PORT,(ImageView)findViewById(R.id.botCamera));
+        raspBotConnector.execute();
+        final Button UP = (Button)findViewById(R.id.UP),DOWN = (Button)findViewById(R.id.DOWN),LEFT = (Button)findViewById(R.id.LEFT),RIGHT = (Button)findViewById(R.id.RIGHT);
+        UP.setOnTouchListener(raspBotConnector);
+        DOWN.setOnTouchListener(raspBotConnector);
+        LEFT.setOnTouchListener(raspBotConnector);
+        RIGHT.setOnTouchListener(raspBotConnector);
     }
 
     @Override
@@ -117,7 +123,6 @@ public class ControllerActivity extends AppCompatActivity {
         // created, to briefly hint to the user that UI controls
         // are available.
         delayedHide(100);
-        raspVideoSocket.execute(((ImageView)findViewById(R.id.botCamera)));
     }
 
     private void toggle() {
@@ -166,13 +171,13 @@ public class ControllerActivity extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause();
-        raspVideoSocket.setRunning(false);
+        raspBotConnector.setRunning(false);
     }
 
     @Override
     protected void onStop(){
         super.onStop();
-        raspVideoSocket.setRunning(false);
+        raspBotConnector.setRunning(false);
     }
 
     @Override
