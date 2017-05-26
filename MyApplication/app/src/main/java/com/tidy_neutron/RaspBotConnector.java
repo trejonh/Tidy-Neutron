@@ -1,6 +1,7 @@
 package com.tidy_neutron;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -11,10 +12,14 @@ import android.widget.Toast;
 import org.opencv.android.Utils;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfByte;
+import org.opencv.highgui.Highgui;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 
 /**
@@ -27,13 +32,14 @@ public class RaspBotConnector extends AsyncTask<Void, Void, Void> implements Vie
     private int CONTROLLER_PORT;
     private Socket raspBotVideoSocket, raspBotControllerSoket;
     private DataOutputStream out;
+    private DataInputStream in;
 
     private boolean running;
-    private static ImageView image = null;
+    private static ControllerActivity image = null;
 
     static{ System.loadLibrary("opencv_java"); }
 
-    public RaspBotConnector(String addr, int videoPort,int controllerPort, ImageView image){
+    public RaspBotConnector(String addr, int videoPort,int controllerPort, ControllerActivity image){
         SOCKET_ADDR =  addr;
         VIDEO_PORT = videoPort;
         CONTROLLER_PORT = controllerPort;
@@ -55,10 +61,11 @@ public class RaspBotConnector extends AsyncTask<Void, Void, Void> implements Vie
     @Override
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
-        startVideoStream();
         if(raspBotControllerSoket != null && raspBotControllerSoket.isConnected()) {
             try {
                 out = new DataOutputStream(raspBotControllerSoket.getOutputStream());
+                in = new DataInputStream(raspBotVideoSocket.getInputStream());
+                startVideoStream();
             }catch (IOException ex){
                 //do noting
             }
@@ -81,17 +88,29 @@ public class RaspBotConnector extends AsyncTask<Void, Void, Void> implements Vie
                 try {
                     if(raspBotVideoSocket == null || raspBotVideoSocket.isClosed())
                         return;
-                    DataInputStream fromRaspBot = new DataInputStream(raspBotVideoSocket.getInputStream());
-                    byte[] data = new byte[1024];
+                    if(image == null)
+                        return;
+                    //Toast.makeText(image.getContext().getApplicationContext(),"Connected",Toast.LENGTH_SHORT).show();
+                    byte[] data = new byte[1024];// = new byte[3160];
+                    Mat imageToDisp;// = Mat.zeros(320,240, CvType.CV_8UC3);
                     while(isRunning()){
                         if(image == null)
                             return;
-                        Mat imageToDisp = Mat.zeros(image.getWidth(),image.getHeight(), CvType.CV_8UC3);
-                        fromRaspBot.readFully(data);
-                        imageToDisp.put(0,0,data);
-                        Bitmap bm = Bitmap.createBitmap(imageToDisp.width(),imageToDisp.height(),Bitmap.Config.ARGB_8888);
+                        in.readFully(data);
+                        //imageToDisp.put(0,0,data);
+
+                        MatOfByte mob = new MatOfByte(data);
+                        imageToDisp = Highgui.imdecode(mob, Highgui.IMREAD_UNCHANGED);
+                        final Bitmap bm = Bitmap.createBitmap(320,240,Bitmap.Config.ARGB_8888);
                         Utils.matToBitmap(imageToDisp,bm);
-                        image.setImageBitmap(bm);
+                        image.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ImageView i = (ImageView)image.findViewById(R.id.botCamera);
+                                i.setImageBitmap(bm);
+                            }
+                        });
+                        //image.setImageBitmap(bm);
                     }
                     raspBotVideoSocket.close();
                 }catch (IOException ex){
