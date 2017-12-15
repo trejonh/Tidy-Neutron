@@ -9,7 +9,7 @@
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
 
-    <ImageView
+    <VideoView
         android:id="@+id/botCamera"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

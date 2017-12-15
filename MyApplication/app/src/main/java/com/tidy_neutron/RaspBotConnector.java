@@ -1,5 +1,8 @@
 package com.tidy_neutron;
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -20,7 +23,12 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.Socket;
+
+import io.vov.vitamio.MediaPlayer;
 
 /**
  * Created by yorel56 on 5/14/2017.
@@ -30,7 +38,8 @@ public class RaspBotConnector extends AsyncTask<Void, Void, Void> implements Vie
     private String SOCKET_ADDR;
     private int VIDEO_PORT;
     private int CONTROLLER_PORT;
-    private Socket raspBotVideoSocket, raspBotControllerSoket;
+    private Socket  raspBotControllerSoket;
+    private DatagramSocket raspBotVideoSocket;
     private DataOutputStream out;
     private DataInputStream in;
 
@@ -41,7 +50,7 @@ public class RaspBotConnector extends AsyncTask<Void, Void, Void> implements Vie
 
     public RaspBotConnector(String addr, int videoPort,int controllerPort, ControllerActivity image){
         SOCKET_ADDR =  addr;
-        VIDEO_PORT = videoPort;
+        //VIDEO_PORT = videoPort;
         CONTROLLER_PORT = controllerPort;
         running = true;
         this.image = image;
@@ -50,7 +59,9 @@ public class RaspBotConnector extends AsyncTask<Void, Void, Void> implements Vie
     @Override
     protected Void doInBackground(Void... arg){
         try{
-            raspBotVideoSocket = new Socket(SOCKET_ADDR,VIDEO_PORT);
+            //DatagramPacket recvPacket;
+           // raspBotVideoSocket = new DatagramSocket(VIDEO_PORT,InetAddress.getByName(SOCKET_ADDR));
+            //recvPacket = raspBotVideoSocket.
             raspBotControllerSoket = new Socket(SOCKET_ADDR,CONTROLLER_PORT);
         }catch(IOException ex){
             //do nothing
@@ -64,8 +75,8 @@ public class RaspBotConnector extends AsyncTask<Void, Void, Void> implements Vie
         if(raspBotControllerSoket != null && raspBotControllerSoket.isConnected()) {
             try {
                 out = new DataOutputStream(raspBotControllerSoket.getOutputStream());
-                in = new DataInputStream(raspBotVideoSocket.getInputStream());
-                startVideoStream();
+               // in = new DataInputStream(raspBotVideoSocket.getInputStream());
+                //startVideoStream();
             }catch (IOException ex){
                 //do noting
             }
@@ -80,46 +91,33 @@ public class RaspBotConnector extends AsyncTask<Void, Void, Void> implements Vie
         this.running = running;
     }
 
-    private void startVideoStream(){
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    if(raspBotVideoSocket == null || raspBotVideoSocket.isClosed())
-                        return;
-                    if(image == null)
-                        return;
-                    //Toast.makeText(image.getContext().getApplicationContext(),"Connected",Toast.LENGTH_SHORT).show();
-                    byte[] data = new byte[1024];// = new byte[3160];
-                    Mat imageToDisp;// = Mat.zeros(320,240, CvType.CV_8UC3);
-                    while(isRunning()){
-                        if(image == null)
-                            return;
-                        in.readFully(data);
-                        //imageToDisp.put(0,0,data);
-
-                        MatOfByte mob = new MatOfByte(data);
-                        imageToDisp = Highgui.imdecode(mob, Highgui.IMREAD_UNCHANGED);
-                        final Bitmap bm = Bitmap.createBitmap(320,240,Bitmap.Config.ARGB_8888);
-                        Utils.matToBitmap(imageToDisp,bm);
-                        image.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                ImageView i = (ImageView)image.findViewById(R.id.botCamera);
-                                i.setImageBitmap(bm);
-                            }
-                        });
-                        //image.setImageBitmap(bm);
-                    }
-                    raspBotVideoSocket.close();
-                }catch (IOException ex){
-
-                }
-
-            }
-        }).start();
-    }
+//    private void startVideoStream(){
+//        for(;;){
+//            try {
+//                byte[] buf = new byte[921600];
+//                DatagramPacket packet = new DatagramPacket(buf, 921600);
+//                raspBotVideoSocket.receive(packet);
+//                if (packet == null) continue;
+//                byte[] receivedImage = packet.getData();
+//                MatOfByte mob = new MatOfByte(receivedImage);
+//                Mat img = Highgui.imdecode(mob, Highgui.IMREAD_UNCHANGED);// convert to bitmap:
+//                Bitmap bm = Bitmap.createBitmap(img.cols(), img.rows(),Bitmap.Config.ARGB_8888);
+//                Utils.matToBitmap(img, bm);
+//
+//                // find the imageview and draw it!
+//                ImageView iv = (ImageView) image.findViewById(R.id.botCamera);
+//                iv.setImageBitmap(bm);
+//            }catch (IOException ex){
+//                image.runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Toast.makeText(image.getApplicationContext(),"IOError",Toast.LENGTH_LONG).show();
+//                    }
+//                });
+//
+//            }
+//        }
+//    }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {

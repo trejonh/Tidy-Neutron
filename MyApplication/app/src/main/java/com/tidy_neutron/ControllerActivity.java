@@ -1,6 +1,8 @@
 package com.tidy_neutron;
 
 import android.annotation.SuppressLint;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,8 +10,8 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.MediaController;
+import android.widget.VideoView;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -17,8 +19,10 @@ import android.widget.Toast;
  */
 public class ControllerActivity extends AppCompatActivity {
     private final String SOCKET_ADDR = "192.168.0.18";
-    private final int SOCKET_PORT = 9000, SOCKET_CONTROLLER_PORT = 8000;
+    private final int SOCKET_PORT = 8080, SOCKET_CONTROLLER_PORT = 8000;
     private RaspBotConnector raspBotConnector;
+    private MediaController mediaController;
+    private VideoView video;
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -55,7 +59,6 @@ public class ControllerActivity extends AppCompatActivity {
                     | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);*/
         }
     };
-    private View mControlsView;
     private final Runnable mShowPart2Runnable = new Runnable() {
         @Override
         public void run() {
@@ -92,7 +95,8 @@ public class ControllerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        if (!io.vov.vitamio.LibsChecker.checkVitamioLibs(this))
+            return;
         setContentView(R.layout.activity_controller);
 
         mVisible = true;
@@ -113,6 +117,19 @@ public class ControllerActivity extends AppCompatActivity {
         DOWN.setOnTouchListener(raspBotConnector);
         LEFT.setOnTouchListener(raspBotConnector);
         RIGHT.setOnTouchListener(raspBotConnector);
+        String path=SOCKET_ADDR+SOCKET_PORT+"/stream/video.mjpeg";
+        Uri uri=Uri.parse(path);
+
+        video=(VideoView)findViewById(R.id.botCamera);
+        mediaController = new MediaController(this);
+        mediaController.setAnchorView(video);
+        video.setVideoURI(uri);
+        video.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                video.start();
+            }
+        });
     }
 
     @Override
@@ -179,7 +196,10 @@ public class ControllerActivity extends AppCompatActivity {
         super.onStop();
         raspBotConnector.setRunning(false);
     }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
     @Override
     protected void onResume(){
         super.onResume();

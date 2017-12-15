@@ -29,4 +29,5 @@ dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     testCompile 'junit:junit:4.12'
     compile project(':openCVLibrary2411')
+    compile group: 'me.neavo', name: 'vitamio', version: '4.2.2'
 }
